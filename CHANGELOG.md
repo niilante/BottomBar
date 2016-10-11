@@ -2,9 +2,33 @@
 
 (or: y u no add shiny new things?!)
 
-### Newest version: 1.4.0.1
+### 2.0.2
 
-* Merged a [PR that adds support for vector drawables for API < 21](https://github.com/roughike/BottomBar/pull/332)
+* Now we're animating the color change on tab titles and icons.
+* Fixed a bug where the BottomBar wouldn't hide completely when it was both shy and drawing under navbar.
+* Made possible to inflate the BottomBar programmatically.
+* Made it possible to control whether the shadow is shown or not.
+* Made setItems to be public to allow writing tests without a designated Activity
+* Made setters for allowing setting tab colors, alphas, textappearances and typefaces programmatically.
+* Increased test coverage a little bit.
+
+### 2.0.1
+
+* Fixed a bug where the tab selection listener is set and multiple tabs could be selected at once
+* Fixed a bug where the reselection listener was fired even it shouldn't have.
+
+### 2.0
+
+* Cleaner code and better APIs
+* No more unnecessary stuff or spaghetti mess
+* Now the look, feel and behavior is defined in XML, as it should be
+* No more nasty regressions, thanks to the automated tests
+* **Everything is a little different compared to earlier, but it's for the greater good!**
+
+See the readme for how to use the new version.
+
+### 1.4.0.1
+
 * Merged a [PR that fixes removing all tabs from BottomBar](https://github.com/roughike/BottomBar/pull/339)
 
 ### 1.4.0

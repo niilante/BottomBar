@@ -8,43 +8,35 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 /**
  * Created by iiro on 7.6.2016.
  */
 public class ThreeTabsActivity extends Activity {
-    private BottomBar mBottomBar;
-    private TextView mMessageView;
+    private TextView messageView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic);
+        setContentView(R.layout.activity_three_tabs);
 
-        mMessageView = (TextView) findViewById(R.id.messageView);
+        messageView = (TextView) findViewById(R.id.messageView);
 
-        mBottomBar = BottomBar.attach(this, savedInstanceState);
-        mBottomBar.setItems(R.menu.bottombar_menu_three_items);
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                mMessageView.setText(TabMessage.get(menuItemId, false));
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                Toast.makeText(getApplicationContext(), TabMessage.get(menuItemId, true), Toast.LENGTH_SHORT).show();
+            public void onTabSelected(@IdRes int tabId) {
+                messageView.setText(TabMessage.get(tabId, false));
             }
         });
-    }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // Necessary to restore the BottomBar's state, otherwise we would
-        // lose the current tab on orientation change.
-        mBottomBar.onSaveInstanceState(outState);
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                Toast.makeText(getApplicationContext(), TabMessage.get(tabId, true), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
